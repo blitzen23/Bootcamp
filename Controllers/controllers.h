@@ -88,7 +88,7 @@ void pushMid(char *name, int day, char *month, int year){
     else {
         patient *temp = createPatient(name, day, month, year);
         curr = head;
-        while ((year >= curr->next->year) || (year == curr->next->year && calculateMonth(month) >= calculateMonth(curr->next->month)) || (year == curr->next->year && calculateMonth(month) == calculateMonth(curr->next->month) && day >= curr->next->day)){
+        while (curr ->next != NULL && (year >= curr->next->year) || (year == curr->next->year && calculateMonth(month) >= calculateMonth(curr->next->month)) || (year == curr->next->year && calculateMonth(month) == calculateMonth(curr->next->month) && day >= curr->next->day)){
             curr = curr->next;
         }
         curr->next->prev = temp;
