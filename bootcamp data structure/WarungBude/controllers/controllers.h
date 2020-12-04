@@ -5,9 +5,11 @@
 #include <thread>
 #include <chrono>
 void delay() {
-  std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    // menu delay tetapi tidak terpakai di code saya
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 void clearScreen(){
+    // function clear screen
     for (int i = 0; i < 50; i++){
         puts("");
     }
@@ -38,6 +40,7 @@ const char* detectOS() {
     #endif
 }
 void printSpace(char *a){
+    // untuk membuat center
     int len = strlen(a);
     len = 20 - len;
     int len1 = len;
@@ -53,6 +56,7 @@ void printSpace(char *a){
     }
 }
 Order *createOrder (char *name, int price, int quantity){
+    // membuat orderan baru
     newOrder = (Order*)malloc(sizeof(Order));
     strcpy(newOrder->name, name);
     newOrder->next = NULL;
@@ -62,6 +66,7 @@ Order *createOrder (char *name, int price, int quantity){
     return newOrder;
 }
 Customer *createCustomer (char *name){
+    // membuat customer baru
     newCustomer = (Customer*)malloc(sizeof(Customer));
     strcpy(newCustomer->name, name);
     newCustomer->next = NULL;
@@ -71,6 +76,7 @@ Customer *createCustomer (char *name){
     return newCustomer;
 }
 Dish *createDish(char *name, int price, int quantity){
+    // membuat dish baru
     newDish = (Dish*)malloc(sizeof(Dish));
     strcpy(newDish->name, name);
     newDish->price = price;
@@ -80,6 +86,7 @@ Dish *createDish(char *name, int price, int quantity){
     return newDish;
 }
 void pushDish(char *name, int price, int quantity){
+    // memasukkan dish baru ke dalam linked list
     if (headDish == NULL){
         currDish = createDish(name, price, quantity);
         headDish = tailDish = currDish;
@@ -109,6 +116,7 @@ void pushDish(char *name, int price, int quantity){
     }
 }
 void popDish(char *name){
+    // membuang dish dari linked list
     currDish = headDish;
     if (currDish == NULL){
         return;
@@ -149,6 +157,7 @@ void popDish(char *name){
     }
 }
 int checkDish(char *name){
+    // untuk mengecek apakah dish tersedia di dalam linked list
     currDish = headDish;
     while (currDish != NULL){
         if (strcmp(currDish->name, name) == 0){
@@ -159,6 +168,7 @@ int checkDish(char *name){
     return 1;
 }
 void printDish(){
+    // untuk print dish
     int count = 1;
     currDish = headDish;
     while (currDish != NULL){
@@ -170,6 +180,7 @@ void printDish(){
     }
 }
 void pushCustomer(char *name){
+    // untuk memasukkan customer baru ke dalam linked list
     int index = DJB2(name);
     if (headCustomer[index] == NULL){
         currCustomer = createCustomer(name);
@@ -183,6 +194,7 @@ void pushCustomer(char *name){
     }
 }
 int searchCustomer(char *name){
+    // untuk mencari customer apakah ada di dalam linked list customer
     int index = DJB2(name);
     if (headCustomer[index] == NULL){
         return 0;
@@ -199,6 +211,7 @@ int searchCustomer(char *name){
     return 0;
 }
 void printCustomer(){
+    // untuk print customer yang akan digunakan pada menu view warteg
     for (int i = 0; i < 26; i++){
         currCustomer = headCustomer[i];
         if (currCustomer != NULL){
@@ -214,6 +227,7 @@ void printCustomer(){
     }
 }
 void pushOrder(Customer *currCustomer, char *name, int quantity, int price){
+    // untuk memasukkan orderan baru ke dalam linked list
     if (currCustomer->headOrder == NULL){
         currOrder = createOrder(name, price, quantity);
         currCustomer->headOrder = currCustomer->tailOrder = currOrder;
@@ -226,6 +240,7 @@ void pushOrder(Customer *currCustomer, char *name, int quantity, int price){
     }
 }
 void popCustomer(int index){
+    // untuk menghapus customer jika sudah melakukan payment
     if (headCustomer[index] == NULL){
         return;
     }
